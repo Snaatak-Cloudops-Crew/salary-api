@@ -11,14 +11,16 @@ import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.servers.Server;
-
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 @Configuration
 public class OpenAPIConfig {
 
   @Bean
   public OpenAPI myOpenAPI() {
     Server devServer = new Server();
-    devServer.setUrl("http://localhost:8080");
+    devServer.setUrl("http://13.203.217.248:8080");
     devServer.setDescription("Server URL in Development environment");
 
     Contact contact = new Contact();
@@ -37,4 +39,14 @@ public class OpenAPIConfig {
 
     return new OpenAPI().info(info).servers(List.of(devServer));
   }
+  @Bean
+public CorsFilter corsFilter() {
+  CorsConfiguration config = new CorsConfiguration();
+  config.addAllowedOrigin("*");
+  config.addAllowedMethod("*");
+  config.addAllowedHeader("*");
+  UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+  source.registerCorsConfiguration("/**", config);
+  return new CorsFilter(source);
+}
 }
