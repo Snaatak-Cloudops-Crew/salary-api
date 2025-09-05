@@ -8,7 +8,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.3.4</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
 
     <groupId>com.opstree.microservice</groupId>
@@ -155,6 +155,9 @@
                         <format>XML</format>
                     </formats>
                     <failBuildOnCVSS>7</failBuildOnCVSS>
+                    <nvdApiKey>${env.NVD_API_KEY}</nvdApiKey>
+                    <dataDirectory>${project.build.directory}/dependency-check-data</dataDirectory>
+                    <outputDirectory>${project.build.directory}/dependency-check-report</outputDirectory>
                     <assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
                 </configuration>
                 <executions>
