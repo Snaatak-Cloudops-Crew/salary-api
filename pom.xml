@@ -144,7 +144,7 @@
                 </configuration>
             </plugin>
 
-            <!-- OWASP Dependency-Check plugin -->
+            <!-- OWASP Dependency-Check plugin (simplified, works both with/without API key) -->
             <plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
@@ -155,10 +155,9 @@
                         <format>XML</format>
                     </formats>
                     <failBuildOnCVSS>7</failBuildOnCVSS>
+                    <!-- Uses env.NVD_API_KEY if defined in Jenkins -->
                     <nvdApiKey>${env.NVD_API_KEY}</nvdApiKey>
-                    <dataDirectory>${project.build.directory}/dependency-check-data</dataDirectory>
-                    <outputDirectory>${project.build.directory}/dependency-check-report</outputDirectory>
-                    <assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
+                    <outputDirectory>${project.build.directory}</outputDirectory>
                 </configuration>
                 <executions>
                     <execution>
